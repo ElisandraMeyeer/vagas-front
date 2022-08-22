@@ -2,11 +2,14 @@
   <div>
     <vagas-favoritas></vagas-favoritas>
     <topo-padrao @navegar="componente = $event" />
-    <alerta v-if="exibirAlerta">
-    <slot>
+    <alerta v-if="exibirAlerta" :tipo="alerta.tipo">
+      <template v-slot:titulo>
+        <h5>{{ alerta.titulo }}</h5>
+      </template>
 
-
-    </slot>
+      <template v-slot:descricao>
+        <p>{{ alerta.descricao }}</p>
+      </template>
     </alerta>
     <Conteudo v-if="visibilidade" :conteudo="componente"></Conteudo>
   </div>
@@ -24,6 +27,7 @@ export default {
     visibilidade: true,
     componente: "Home",
     exibirAlerta: false,
+    alerta: {titulo: '', descricao: '', tipo: ''}
   }),
   methods: {
     acao(p1, p2) {
@@ -39,16 +43,14 @@ export default {
     Alerta,
   },
   mounted() {
-    this.emitter.on("alerta", () => {
+    this.emitter.on("alerta", (a) => {// o (a) é um parâmetro que está sendo recebido do PublicarVaga no método salvarVaga
+      this.alerta = a
       this.exibirAlerta = true;
       setTimeout(() => (this.exibirAlerta = false), 4000);
     });
-
-    
   },
 };
 </script>
 
 <style scoped>
-
 </style>

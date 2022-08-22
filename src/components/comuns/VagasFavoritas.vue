@@ -2,7 +2,7 @@
   <div>
     <div class="divVagasFavoritas">
       <button
-        class="btn btn-primary"
+        class="btn btn-outline-dark mt-2"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasRight"
@@ -49,6 +49,7 @@ export default {
   mounted() {
     this.emitter.on("favoritarVaga", (titulo) => {
       this.vagas.push(titulo);//adiciona o titulo das vagas no array
+    console.log("vagas:", this.vagas)
     }); //com o .on ele vai fazer uma ação | com a função de callback ele vai receber parâmetros para poderem ser utilizados
 
     this.emitter.on("desfavoritarVaga", (titulo) => {

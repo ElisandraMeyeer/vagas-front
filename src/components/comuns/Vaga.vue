@@ -57,6 +57,7 @@ export default {
     },
     descricao: {
       type: String,
+      required: true, 
       default() {
         return "*".repeat(20);
       },
